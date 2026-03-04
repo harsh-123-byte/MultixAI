@@ -5,11 +5,13 @@ import axios from "axios";
 import { v2 as cloudinary } from "cloudinary";
 import fs from 'fs'
 import pdf from 'pdf-parse/lib/pdf-parse.js'
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const AI = new OpenAI({
     apiKey: process.env.GEMINI_API_KEY,
     baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/"
 });
+
 
 
 // Controller funnction for article generation---> Phir iska end point create kar denge aiRouts.js me waha se phir server.js me jo ai wala route bana hai usme iska end point jod ke check kar sakte hain.
@@ -25,7 +27,7 @@ export const generateArticle = async (req, res)=>{
         }
 
         const response = await AI.chat.completions.create({
-            model: "gemini-2.0-flash",
+            model: "gemini-1.5-flash",
             messages: [{
                 // we will provide aur prompt here with therole 'user'
                     role: "user",
@@ -72,7 +74,7 @@ export const generateBlogTitle = async (req, res)=>{
         }
 
         const response = await AI.chat.completions.create({
-            model: "gemini-2.0-flash",
+            model: "gemini-1.5-flash",
             messages: [{ role: "user", content: prompt, } ],
             temperature: 0.7,
             max_tokens: 100,
@@ -229,7 +231,7 @@ export const resumeReview = async (req, res)=>{
 
         // Send this prompt to google Gemini API to get the response.
        const response = await AI.chat.completions.create({
-            model: "gemini-2.0-flash",
+            model: "gemini-1.5-flash",
             messages: [{ role: "user", content: prompt, } ],
             temperature: 0.7,
             max_tokens: 1000,
