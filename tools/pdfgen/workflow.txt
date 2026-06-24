@@ -55,7 +55,7 @@ MultixAI is a full-stack web app with a React client (Vite) and a Node/Express s
 
 - Remove background:
   1. User uploads image via client.
-  2. File arrives at server via `multer`.
+  2. File arrives at server via `multer` because express do not process the images and files.
   3. Server calls background-removal AI or Cloudinary transform.
   4. Returns processed image URL.
 
